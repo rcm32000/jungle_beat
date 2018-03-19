@@ -4,7 +4,7 @@ require './lib/linked_list'
 require './lib/node'
 require 'pry'
 
-class TestLinkedList < Minitest::Test
+class TestLinkedListTest < Minitest::Test
   def test_class_exists
     list = LinkedList.new
 
@@ -43,5 +43,20 @@ class TestLinkedList < Minitest::Test
     list.append('doop')
 
     assert_equal 'doop', list.to_string
+  end
+
+  def test_mutltiple_nodes
+    list = LinkedList.new
+
+    assert_nil list.head
+    list.append('doop')
+
+    refute_nil list.head
+    assert_nil list.head.next_node
+    list.append('deep')
+
+    refute_nil list.head.next_node
+    assert_equal 2, list.count
+    assert_equal 'doop deep', list.to_string
   end
 end
