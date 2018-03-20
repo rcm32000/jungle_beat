@@ -55,4 +55,14 @@ class LinkedList
     new_node.next_node = current_node.next_node
     current_node.next_node = new_node
   end
+
+  def find(index, count)
+    current_node = @head
+    node = 0
+    until current_node == index
+      current_node = current_node.next_node
+      node +=1
+    end
+    current_node = current.to_s
+  end
 end
