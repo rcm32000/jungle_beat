@@ -59,10 +59,14 @@ class LinkedList
   def find(index, count)
     current_node = @head
     node = 0
-    until current_node == index
+    until node == index
       current_node = current_node.next_node
       node +=1
     end
-    current_node = current.to_s
+    beat = "#{current_node.data}"
+    (count - 1).times do current_node = current_node.next_node
+      beat.concat(" #{current_node.data}")
+    end
+    beat
   end
 end
