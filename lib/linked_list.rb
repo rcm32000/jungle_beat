@@ -4,7 +4,6 @@ class LinkedList
   def initialize
     @head         = nil
     @node_count   = 0
-    @current_node = @head
   end
 
   def append(data)
@@ -13,7 +12,7 @@ class LinkedList
       @head = Node.new(data)
       @node_count += 1
     else
-      until current_node.next_node == nil
+      until current_node.next_node.nil?
         current_node = current_node.next_node
       end
       current_node.next_node = Node.new(data)
@@ -35,5 +34,25 @@ class LinkedList
       beat.concat(" #{current_node.data}")
     end
     beat
+  end
+
+  def prepend(data)
+    old_head = @head
+    @head = Node.new(data) if @head.nil?
+    @head = Node.new(data)
+    @head.next_node = old_head
+    @node_count += 1
+  end
+
+  def insert(index, data)
+    count = 0
+    current_node = @head
+    new_node = Node.new(data)
+    until count == index - 1
+      current_node = current_node.next_node
+      count += 1
+    end
+    new_node.next_node = current_node.next_node
+    current_node.next_node = new_node
   end
 end

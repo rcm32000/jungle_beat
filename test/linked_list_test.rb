@@ -45,7 +45,7 @@ class TestLinkedListTest < Minitest::Test
     assert_equal 'doop', list.to_string
   end
 
-  def test_mutltiple_nodes
+  def test_two_nodes
     list = LinkedList.new
 
     assert_nil list.head
@@ -58,5 +58,28 @@ class TestLinkedListTest < Minitest::Test
     refute_nil list.head.next_node
     assert_equal 2, list.count
     assert_equal 'doop deep', list.to_string
+  end
+
+  def test_three_nodes
+    list = LinkedList.new
+    list.append('doop')
+    list.append('deep')
+
+    assert_nil list.head.next_node.next_node
+    list.append('beep')
+
+    refute_nil list.head.next_node.next_node
+    assert_equal 3, list.count
+    assert_equal 'doop deep beep', list.to_string
+  end
+
+  def test_prepend
+    list = LinkedList.new
+    list.append('plop')
+    list.append('suu')
+    list.prepend('dop')
+
+    assert_equal 'dop plop suu', list.to_string
+    assert_equal 3, list.count
   end
 end
