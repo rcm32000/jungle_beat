@@ -104,4 +104,29 @@ class TestLinkedListTest < Minitest::Test
     assert_equal 'deep woo shi shu blop', list.to_string
     assert_equal 'shi', list.find(2, 1)
   end
+
+  def test_includes_method
+    list = LinkedList.new
+    list.append('shi')
+    list.append('shu')
+    list.prepend('deep')
+
+    assert list.includes?('deep')
+    refute list.includes?('dep')
+    assert list.includes?('shu')
+  end
+
+  def test_pop_method
+    list = LinkedList.new
+    list.append('shi')
+    list.append('shu')
+    list.prepend('deep')
+    list.insert(1, 'woo')
+    list.append('blop')
+
+    assert_equal 'blop', list.pop
+    assert_equal 'shu', list.pop
+    assert_equal 'deep woo shi', list.to_string
+    assert_equal 3, list.count
+  end
 end

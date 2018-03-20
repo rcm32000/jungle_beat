@@ -54,6 +54,8 @@ class LinkedList
     end
     new_node.next_node = current_node.next_node
     current_node.next_node = new_node
+    @node_count += 1
+    data
   end
 
   def find(index, count)
@@ -61,12 +63,30 @@ class LinkedList
     node = 0
     until node == index
       current_node = current_node.next_node
-      node +=1
+      node += 1
     end
     beat = "#{current_node.data}"
-    (count - 1).times do current_node = current_node.next_node
+    (count - 1).times do
+      current_node = current_node.next_node
       beat.concat(" #{current_node.data}")
     end
+    beat
+  end
+
+  def includes?(data)
+    current_node = @head
+    until current_node.data == data || current_node.next_node.nil?
+      current_node = current_node.next_node
+    end
+    current_node.data == data
+  end
+
+  def pop
+    current_node = @head
+    current_node = current_node.next_node until current_node.next_node.next_node.nil?
+    @node_count -= 1
+    beat = current_node.next_node.data
+    current_node.next_node = nil
     beat
   end
 end
