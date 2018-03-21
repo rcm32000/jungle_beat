@@ -3,26 +3,30 @@ class LinkedList
   attr_reader :head
   def initialize
     @head         = nil
-    @node_count   = 0
   end
 
   def append(data)
     current_node = @head
     if @head == nil
       @head = Node.new(data)
-      @node_count += 1
     else
       until current_node.next_node.nil?
         current_node = current_node.next_node
       end
       current_node.next_node = Node.new(data)
-      @node_count += 1
     end
     data
   end
 
   def count
-    @node_count
+    node_count = 0
+    current_node = @head
+    node_count += 1 unless @head.nil?
+    until current_node.next_node.nil?
+      current_node = current_node.next_node
+      node_count += 1
+    end
+    node_count
   end
 
   def to_string
@@ -41,7 +45,6 @@ class LinkedList
     @head = Node.new(data) if @head.nil?
     @head = Node.new(data)
     @head.next_node = old_head
-    @node_count += 1
   end
 
   def insert(index, data)
@@ -54,7 +57,6 @@ class LinkedList
     end
     new_node.next_node = current_node.next_node
     current_node.next_node = new_node
-    @node_count += 1
     data
   end
 
@@ -84,7 +86,6 @@ class LinkedList
   def pop
     current_node = @head
     current_node = current_node.next_node until current_node.next_node.next_node.nil?
-    @node_count -= 1
     beat = current_node.next_node.data
     current_node.next_node = nil
     beat
