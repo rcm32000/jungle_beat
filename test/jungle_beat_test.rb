@@ -39,21 +39,30 @@ class TestJunglBeat < Minitest::Test
     assert_equal 'doo', jb.list.head.next_node.data
   end
 
-  def test_append_method_overwrites_existing
+  def test_append_method_for_multi
     jb = JungleBeat.new
     jb.append('deep doo ditt')
     jb.append('woo hoo shu')
 
     assert_equal 'deep doo ditt woo hoo shu', jb.list.to_string
     assert_equal 6, jb.count
+    assert_equal 6, jb.list.count
   end
-end
-#
-# jb = JungleBeat.new
-# => <JungleBeat list=<LinkedList head=nil #234567890890> #456789045678>
-# > jb.append('deep doo ditt')
 
-# > jb.append('woo hoo shu')
-# => 'woo hoo shu'
-# > jb.count
-# 6
+  def test_play_method
+    jb = JungleBeat.new
+    jb.append("deep doo ditt woo hoo shu")
+
+    assert_equal 6, jb.list.count
+    jb.play
+  end
+
+  # def test_append_only_valid_beats
+  #   jb = JungleBeat.new
+  #   jb.append('shi')
+  #   jb.append('shuuu')
+  #
+  #   assert jb.list.head.valid?
+  #   assert_equal 'shi', jb.all
+  # end
+end
